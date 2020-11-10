@@ -4,10 +4,8 @@
 using namespace std;
 
 int main() {
-  random_device rd{};  // Zufallszahl aus der Temperatur
-  mt19937 rng{rd()};   //"pseudo Zufallszahlen" ahnhand einer echten Zufallszahl
-  uniform_real_distribution<float> dist{
-      0, 1};  // Verteilungsfunktion zischen 0 und 1
+  mt19937 rng{random_device{}()};
+  uniform_real_distribution<float> dist{0, 1};  // Zufallszahl
   auto random = [&]() {
     return dist(rng);
   };  // Lamdaexpression - hier definierte Funktion
@@ -23,6 +21,6 @@ int main() {
     if (r2 < 1) ++c;
   }
 
-  auto monte_carlo_pi = 4 * float(c) / float(n);
+  const auto monte_carlo_pi = 4.0f * c / n;
   cout << "pi = " << monte_carlo_pi << '\n';
 }
